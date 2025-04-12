@@ -1,6 +1,6 @@
-package br.com.alura.screenmatch.models.Movie;
+package br.com.alura.screenmatch.models;
 
-public class Movie {
+public class Title {
     private String title;
     private int yearOfRelease;
     private boolean includedInPlan;
