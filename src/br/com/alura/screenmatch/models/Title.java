@@ -1,6 +1,6 @@
 package br.com.alura.screenmatch.models;
 
-public class Title {
+public abstract class Title {
     private String title;
     private int yearOfRelease;
     private boolean includedInPlan;
@@ -8,25 +8,54 @@ public class Title {
     private double totalRating;
     private double lengthInMinutes;
 
-    public int getNumberOfRatings() {
-        return numberOfRatings;
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public int getYearOfRelease() {
+        return yearOfRelease;
+    }
+
     public void setYearOfRelease(int yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
+    }
+
+    public boolean isIncludedInPlan() {
+        return includedInPlan;
     }
 
     public void setIncludedInPlan(boolean includedInPlan) {
         this.includedInPlan = includedInPlan;
     }
 
+    public int getNumberOfRatings() {
+        return numberOfRatings;
+    }
+
+    public void setNumberOfRatings(int numberOfRatings) {
+        this.numberOfRatings = numberOfRatings;
+    }
+
+    public double getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(double totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public double getLengthInMinutes() {
+        return lengthInMinutes;
+    }
+
     public void setLengthInMinutes(double lengthInMinutes) {
         this.lengthInMinutes = lengthInMinutes;
     }
+
 
     public void printMovieInfo() {
         System.out.println("br.com.alura.screenmatch.models.Movie.Movie title: " + title);
