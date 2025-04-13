@@ -8,9 +8,9 @@ public class Main {
         myMovie.setYearOfRelease(2011);
         myMovie.setLengthInMinutes(120);
 
-//      myMovie.printMovieInfo();
-//      System.out.println(myMovie.averageRating());
-//      System.out.println("Total number of ratings: " + myMovie.getNumberOfRatings());
+        myMovie.printMovieInfo();
+        System.out.println(myMovie.averageRating());
+        System.out.println("Total number of ratings: " + myMovie.getNumberOfRatings());
 
         Serie mySerie = new Serie();
         mySerie.setTitle("Game of Thrones");
@@ -19,11 +19,11 @@ public class Main {
         mySerie.setNumberOfSeasons(5);
         mySerie.setNumberOfEpisodes(12);
         mySerie.setActive(true);
-        mySerie.setMinutesPerEpisode(15);
+        mySerie.setMinutesPerEpisode(50);
 
         mySerie.printMovieInfo();
         System.out.println(mySerie.averageRating());
-        System.out.println("Total number of ratings: " + mySerie.getNumberOfRatings());
+        System.out.println("Total number of minutes: " + mySerie.getLengthInMinutes());
     }
 
 
