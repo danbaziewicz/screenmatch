@@ -1,3 +1,6 @@
+import br.com.alura.screenmatch.calculations.RecommendationFilter;
+import br.com.alura.screenmatch.calculations.TimeCalculator;
+import br.com.alura.screenmatch.models.Episode;
 import br.com.alura.screenmatch.models.Movie;
 import br.com.alura.screenmatch.models.Serie;
 
@@ -24,7 +27,27 @@ public class Main {
         mySerie.printMovieInfo();
         System.out.println(mySerie.averageRating());
         System.out.println("Total number of minutes: " + mySerie.getLengthInMinutes());
+
+        Movie myMovie2 = new Movie();
+        myMovie2.setTitle("Harry Potter");
+        myMovie2.setYearOfRelease(2011);
+        myMovie2.setLengthInMinutes(130);
+
+
+
+        TimeCalculator calculator = new TimeCalculator();
+        calculator.adds(myMovie);
+        calculator.adds(myMovie2);
+        calculator.adds(mySerie);
+        System.out.println("Total movie time: " + calculator.getTotalOfTime());
+
+        RecommendationFilter filter = new RecommendationFilter();
+        filter.filter(myMovie);
+
+        Episode episode = new Episode();
+        episode.setNumber(1);
+        episode.setSerie(mySerie);
+        episode.setTotalViews(300);
+        filter.filter(episode);
     }
-
-
 }
