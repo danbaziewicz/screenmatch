@@ -1,10 +1,14 @@
 package br.com.alura.screenmatch.models;
 
-public class Serie extends Title{
+public class Serie extends Title {
     private int numberOfSeasons;
     private int numberOfEpisodes;
     private boolean isActive;
     private int minutesPerEpisode;
+
+    public Serie(String title, int yearOfRelease) {
+        super(title, yearOfRelease);
+    }
 
     public int getNumberOfSeasons() {
         return numberOfSeasons;
