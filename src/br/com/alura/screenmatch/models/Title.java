@@ -8,6 +8,11 @@ public abstract class Title {
     private double totalRating;
     private double lengthInMinutes;
 
+    public Title(String title, int yearOfRelease) {
+        this.title = title;
+        this.yearOfRelease = yearOfRelease;
+    }
+
     public String getTitle() {
         return title;
     }
