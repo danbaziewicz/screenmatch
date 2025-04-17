@@ -5,6 +5,10 @@ import br.com.alura.screenmatch.calculations.Rating;
 public class Movie extends Title implements Rating {
     private String director;
 
+    public Movie(String title, int yearOfRelease) { //construtor
+        super(title, yearOfRelease);
+    }
+
     public String getDirector() {
         return director;
     }
@@ -16,5 +20,10 @@ public class Movie extends Title implements Rating {
     @Override
     public int getRating() {
         return (int) (averageRating() / 2);
+    }
+
+    @Override
+    public String toString() {
+        return "Movie: " + this.getTitle() + " (" + this.getYearOfRelease() + ")";
     }
 }
