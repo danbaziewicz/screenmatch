@@ -1,6 +1,6 @@
 package br.com.alura.screenmatch.models;
 
-public abstract class Title {
+public class Title implements Comparable<Title> {
     private String title;
     private int yearOfRelease;
     private boolean includedInPlan;
@@ -77,5 +77,10 @@ public abstract class Title {
 
     public double averageRating() {
         return totalRating/numberOfRatings;
+    }
+
+    @Override
+    public int compareTo(Title otherTitle) {
+        return this.title.compareTo(otherTitle.getTitle());
     }
 }
