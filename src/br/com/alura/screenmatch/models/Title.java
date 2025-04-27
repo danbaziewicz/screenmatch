@@ -1,20 +1,34 @@
 package br.com.alura.screenmatch.models;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Title implements Comparable<Title> {
-    @SerializedName("Title")
     private String title;
-    @SerializedName("Year")
     private int yearOfRelease;
     private boolean includedInPlan;
     private int numberOfRatings;
     private double totalRating;
-    private double lengthInMinutes;
+    private int lengthInMinutes;
 
     public Title(String title, int yearOfRelease) {
         this.title = title;
         this.yearOfRelease = yearOfRelease;
+    }
+
+    public Title(TitleOmdb myTitleOmdb) {
+        this.title = myTitleOmdb.title();
+        this.yearOfRelease = Integer.parseInt(myTitleOmdb.year());
+//        this.lengthInMinutes = Integer.parseInt(myTitleOmdb.runtime().substring(0, 3));
+        String runtime = myTitleOmdb.runtime();
+        if (runtime != null && runtime.endsWith("min")) {
+            String numericPart = runtime.replace("min", "").trim();
+            try {
+                this.lengthInMinutes = Integer.parseInt(numericPart);
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao converter duração: " + runtime);
+                this.lengthInMinutes = 0; // define 0 minutos caso não consiga converter
+            }
+        } else {
+            this.lengthInMinutes = 0; // define 0 minutos se o formato não for esperado
+        }
     }
 
     public String getTitle() {
@@ -61,13 +75,13 @@ public class Title implements Comparable<Title> {
         return lengthInMinutes;
     }
 
-    public void setLengthInMinutes(double lengthInMinutes) {
+    public void setLengthInMinutes(int lengthInMinutes) {
         this.lengthInMinutes = lengthInMinutes;
     }
 
 
     public void printMovieInfo() {
-        System.out.println("br.com.alura.screenmatch.models.Movie.Movie title: " + title);
+        System.out.println("Title: " + title);
         System.out.println("Year of release: " + yearOfRelease);
         System.out.println("Included in plan: " + includedInPlan);
         System.out.println("Total rating: " + totalRating);
@@ -91,6 +105,6 @@ public class Title implements Comparable<Title> {
     @Override
     public String toString() {
         return  "title='" + title + '\'' +
-                ", yearOfRelease=" + yearOfRelease;
+                ", yearOfRelease=" + yearOfRelease + ", lengthInMinutes=" + lengthInMinutes;
     }
 }
