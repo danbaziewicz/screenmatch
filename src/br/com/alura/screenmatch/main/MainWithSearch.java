@@ -33,13 +33,19 @@ public class MainWithSearch {
         String json = response.body();
         System.out.println(json);
 
-//        Gson gson = new Gson();
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
-        //Title myTitle = gson.fromJson(json, Title.class);
+
         TitleOmdb myTitleOmdb = gson.fromJson(json, TitleOmdb.class);
         System.out.println(myTitleOmdb);
-        Title myTitle = new Title(myTitleOmdb);
-        System.out.println("Titulo convertido");
-        System.out.println(myTitle);
+        try {
+            Title myTitle = new Title(myTitleOmdb);
+            System.out.println("Titulo convertido");
+            System.out.println(myTitle);
+        } catch (NumberFormatException e) {
+            System.out.println("Erro ao converter duração: " + myTitleOmdb.runtime());
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Fim");
+
     }
 }
