@@ -1,5 +1,6 @@
 package br.com.alura.screenmatch.main;
 
+import br.com.alura.screenmatch.exeptions.YearConvertionErrorException;
 import br.com.alura.screenmatch.models.Title;
 import br.com.alura.screenmatch.models.TitleOmdb;
 import com.google.gson.FieldNamingPolicy;
@@ -22,28 +23,29 @@ public class MainWithSearch {
         var search = URLEncoder.encode(scan.nextLine(), StandardCharsets.UTF_8);
 
         String url = "https://www.omdbapi.com/?t=" + search + "&apikey=65fc0c38";
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .build();
-
-        HttpResponse<String> response = client
-                .send(request, HttpResponse.BodyHandlers.ofString());
-        String json = response.body();
-        System.out.println(json);
-
-        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
-
-        TitleOmdb myTitleOmdb = gson.fromJson(json, TitleOmdb.class);
-        System.out.println(myTitleOmdb);
         try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .build();
+
+            HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+            String json = response.body();
+            System.out.println(json);
+
+            Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
+
+            TitleOmdb myTitleOmdb = gson.fromJson(json, TitleOmdb.class);
+            System.out.println(myTitleOmdb);
+
             Title myTitle = new Title(myTitleOmdb);
             System.out.println("Titulo convertido");
             System.out.println(myTitle);
         } catch (NumberFormatException e) {
-            System.out.println("Erro ao converter duração: " + myTitleOmdb.runtime());
-            System.out.println(e.getMessage());
+            System.out.println("Erro de conversão numérica na duração: " + e.getMessage());
+        } catch (YearConvertionErrorException e) {
+            System.out.println("Erro de conversão no ano de lançamento: " + e.getMessage());
         }
         System.out.println("Fim");
 
