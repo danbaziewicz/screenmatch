@@ -1,5 +1,7 @@
 package br.com.alura.screenmatch.models;
 
+import br.com.alura.screenmatch.exeptions.YearConvertionErrorException;
+
 public class Title implements Comparable<Title> {
     private String title;
     private int yearOfRelease;
@@ -15,8 +17,12 @@ public class Title implements Comparable<Title> {
 
     public Title(TitleOmdb myTitleOmdb) {
         this.title = myTitleOmdb.title();
+
+        if(myTitleOmdb.year().length() > 4) {
+            throw new YearConvertionErrorException("Ano inválido. Max 4 dígitos: " + myTitleOmdb.year());
+        }
+
         this.yearOfRelease = Integer.parseInt(myTitleOmdb.year());
-//        this.lengthInMinutes = Integer.parseInt(myTitleOmdb.runtime().substring(0, 3));
         String runtime = myTitleOmdb.runtime();
         if (runtime != null && runtime.endsWith("min")) {
             String numericPart = runtime.replace("min", "").trim();
@@ -24,10 +30,10 @@ public class Title implements Comparable<Title> {
                 this.lengthInMinutes = Integer.parseInt(numericPart);
             } catch (NumberFormatException e) {
                 System.out.println("Erro ao converter duração: " + runtime);
-                this.lengthInMinutes = 0; // define 0 minutos caso não consiga converter
+                this.lengthInMinutes = 0;
             }
         } else {
-            this.lengthInMinutes = 0; // define 0 minutos se o formato não for esperado
+            this.lengthInMinutes = 0;
         }
     }
 
