@@ -110,7 +110,7 @@ public class Title implements Comparable<Title> {
 
     @Override
     public String toString() {
-        return  "title='" + title + '\'' +
-                ", yearOfRelease=" + yearOfRelease + ", lengthInMinutes=" + lengthInMinutes;
+        return  "(title= " + title +
+                ", yearOfRelease= " + yearOfRelease + ", lengthInMinutes= " + lengthInMinutes + ")";
     }
 }
